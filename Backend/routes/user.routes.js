@@ -28,4 +28,6 @@ router.post(
   userController.loginUser
 );
 
+router.get('/profile', userController.getUserProfile);
+
 module.exports = router;
