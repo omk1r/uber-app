@@ -14,9 +14,6 @@ const UserProtectWrapper = ({ children }) => {
     if (!token) {
       navigate('/login');
     }
-  }, [token, navigate]);
-
-  useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BASE_URL}/users/profile`, {
         headers: {
@@ -25,7 +22,6 @@ const UserProtectWrapper = ({ children }) => {
       })
       .then((response) => {
         if (response.status === 200) {
-          console.log(response.data);
           setUser(response.data.user);
           setIsLoading(false);
         }
@@ -35,7 +31,8 @@ const UserProtectWrapper = ({ children }) => {
         localStorage.removeItem('token');
         navigate('/login');
       });
-  }, []);
+  }, [token]);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
