@@ -13,10 +13,16 @@ const Home = () => {
   };
 
   useGSAP(() => {
-    gsap.to(panelRef.current, {
-      height: '70%',
-    });
-  });
+    if (panelOpen) {
+      gsap.to(panelRef.current, {
+        height: '70%',
+      });
+    } else {
+      gsap.to(panelRef.current, {
+        height: '0%',
+      });
+    }
+  }, [panelOpen]);
 
   return (
     <div className="relative h-screen">
