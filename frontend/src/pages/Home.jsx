@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import 'remixicon/fonts/remixicon.css';
 
 const Home = () => {
   const [pickup, setPickup] = useState('');
   const [destination, setDestination] = useState('');
   const [panelOpen, setPanelOpen] = useState(false);
   const panelRef = useRef(null);
+  const panelCloseRef = useRef(null);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -16,10 +18,18 @@ const Home = () => {
     if (panelOpen) {
       gsap.to(panelRef.current, {
         height: '70%',
+        opacity: 1,
+      });
+      gsap.to(panelCloseRef.current, {
+        opacity: 1,
       });
     } else {
       gsap.to(panelRef.current, {
         height: '0%',
+        opacity: 0,
+      });
+      gsap.to(panelCloseRef.current, {
+        opacity: 0,
       });
     }
   }, [panelOpen]);
@@ -39,7 +49,14 @@ const Home = () => {
         />
       </div>
       <div className="top-0 absolute flex flex-col justify-end w-full h-screen">
-        <div className="relative bg-white p-5 h-[30%]">
+        <div className="relative bg-white p-6 h-[30%]">
+          <h5
+            ref={panelCloseRef}
+            onClick={() => setPanelOpen(false)}
+            className="top-3 right-6 absolute text-2xl"
+          >
+            <i className="ri-arrow-down-s-line"></i>
+          </h5>
           <h4 className="font-semibold text-3xl">Find a trip</h4>
           <form
             onSubmit={(e) => {
@@ -47,7 +64,7 @@ const Home = () => {
             }}
             className="relative"
           >
-            <div className="top-1/2 left-[5%] absolute bg-gray-500 rounded-full w-1 h-14 -translate-y-1/2 line"></div>
+            <div className="top-1/2 left-5 absolute bg-gray-500 rounded-full w-[2px] h-14 -translate-y-1/2 line"></div>
             <input
               onClick={() => setPanelOpen(true)}
               value={pickup}
@@ -66,7 +83,7 @@ const Home = () => {
             />
           </form>
         </div>
-        <div ref={panelRef} className="bg-red-500 p-5 h-0"></div>
+        <div ref={panelRef} className="bg-red-500 h-0"></div>
       </div>
     </div>
   );
