@@ -49,7 +49,7 @@ const UserLogin = () => {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="bg-[#eeee] mb-7 px-4 py-2 rounded w-full text-lg placeholder:text-base"
+            className="bg-[#eeee] mb-7 px-4 py-2 rounded w-full placeholder:text-base text-lg"
             type="email"
             placeholder="email@example.com"
           />
@@ -62,10 +62,10 @@ const UserLogin = () => {
             name="password"
             id="password"
             placeholder="password"
-            className="bg-[#eeee] mb-7 px-4 py-2 rounded w-full text-lg placeholder:text-base"
+            className="bg-[#eeee] mb-7 px-4 py-2 rounded w-full placeholder:text-base text-lg"
           />
 
-          <button className="bg-[#111] mb-3 px-4 py-2 rounded w-full font-semibold text-lg text-white placeholder:text-base">
+          <button className="bg-[#111] mb-3 px-4 py-2 rounded w-full font-semibold text-white placeholder:text-base text-lg">
             Login
           </button>
         </form>
@@ -79,7 +79,7 @@ const UserLogin = () => {
       <div>
         <Link
           to="/captain-login"
-          className="flex justify-center items-center bg-[#10b461] mb-7 px-4 py-2 rounded w-full font-semibold text-lg text-white placeholder:text-base"
+          className="flex justify-center items-center bg-[#10b461] mb-7 px-4 py-2 rounded w-full font-semibold text-white placeholder:text-base text-lg"
         >
           Sign in as Captain
         </Link>
