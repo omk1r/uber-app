@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LocationSearchPanel = ({ vehiclePanel, setVehiclePanel }) => {
+const LocationSearchPanel = ({ setVehiclePanelOpen, setPanelOpen }) => {
   const locations = [
     "24B, Near Kapoor's cafe, Sheriyans Coding School, Bhopal",
     ' 15A, Opposite Central Park, Tech Valley, Bangalore',
@@ -14,7 +14,10 @@ const LocationSearchPanel = ({ vehiclePanel, setVehiclePanel }) => {
           <div
             className="flex justify-start items-center gap-4 my-2 p-3 border-2 border-gray-100 active:border-black rounded-full"
             key={index}
-            onClick={() => setVehiclePanel(true)}
+            onClick={() => {
+              setVehiclePanelOpen(true);
+              setPanelOpen(false);
+            }}
           >
             <h2 className="bg-[#B3B3B3] px-1 rounded-full text-black">
               <i className="ri-map-pin-2-line"></i>
