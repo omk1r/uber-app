@@ -146,9 +146,9 @@ const Home = () => {
       {/* confirmed vehicle panel */}
       <div
         ref={confirmedRidePanelRef}
-        className="bottom-0 z-10 fixed bg-white px-3 py-8 w-full translate-y-full"
+        className="bottom-0 z-10 fixed bg-white px-3 py-6 w-full translate-y-full"
       >
-        <ConfirmedRide />
+        <ConfirmedRide setConfirmedRidePanel={setConfirmedRidePanel} />
       </div>
     </div>
   );
