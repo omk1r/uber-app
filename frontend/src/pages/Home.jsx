@@ -5,6 +5,8 @@ import 'remixicon/fonts/remixicon.css';
 import LocationSearchPanel from '../components/LocationSearchPanel';
 import VehiclePanel from '../components/VehiclePanel';
 import ConfirmedRide from '../components/ConfirmedRide';
+import LookingForDriver from '../components/LookingForDriver';
+import WaitingForDriver from '../components/WaitingForDriver';
 
 const Home = () => {
   const [pickup, setPickup] = useState('');
@@ -12,9 +14,14 @@ const Home = () => {
   const [panelOpen, setPanelOpen] = useState(false);
   const [vehiclePanelOpen, setVehiclePanelOpen] = useState(false);
   const [confirmedRidePanel, setConfirmedRidePanel] = useState(false);
+  const [vehicleFound, setVehicleFound] = useState(false);
+  const [waitingForDriver, setWaitingForDriver] = useState(false);
+
   const panelRef = useRef(null);
   const vehiclePanelRef = useRef(null);
   const confirmedRidePanelRef = useRef(null);
+  const vehicleFoundRef = useRef(null);
+  const waitingForDriverRef = useRef(null);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -68,8 +75,36 @@ const Home = () => {
     }
   }, [confirmedRidePanel]);
 
+  useGSAP(() => {
+    if (vehicleFound) {
+      gsap.to(vehicleFoundRef.current, {
+        transform: 'translateY(0)',
+        ease: 'sine.in',
+      });
+    } else {
+      gsap.to(vehicleFoundRef.current, {
+        transform: 'translateY(100%)',
+        ease: 'sine.out',
+      });
+    }
+  }, [vehicleFound]);
+
+  useGSAP(() => {
+    if (waitingForDriver) {
+      gsap.to(waitingForDriverRef.current, {
+        transform: 'translateY(0)',
+        ease: 'sine.in',
+      });
+    } else {
+      gsap.to(waitingForDriverRef.current, {
+        transform: 'translateY(100%)',
+        ease: 'sine.out',
+      });
+    }
+  }, [waitingForDriver]);
+
   return (
-    <div className="relative h-screen overflow-hidden">
+    <div className="relative w-full max-w-xl h-screen overflow-hidden">
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
         alt=""
@@ -80,7 +115,7 @@ const Home = () => {
         <img
           src="https://cdn.dribbble.com/users/914217/screenshots/4506553/media/7be2be6f43f64c27946d1068a602ece1.gif"
           alt=""
-          className="h-screen object-cover"
+          className="w-full h-screen object-cover"
         />
       </div>
 
@@ -135,7 +170,7 @@ const Home = () => {
       {/* vehicle panel */}
       <div
         ref={vehiclePanelRef}
-        className="bottom-0 z-10 fixed bg-white px-3 py-8 w-full translate-y-full"
+        className="bottom-0 z-10 fixed bg-white px-3 py-8 w-full max-w-xl translate-y-full"
       >
         <VehiclePanel
           setVehiclePanelOpen={setVehiclePanelOpen}
@@ -146,9 +181,26 @@ const Home = () => {
       {/* confirmed vehicle panel */}
       <div
         ref={confirmedRidePanelRef}
-        className="bottom-0 z-10 fixed bg-white px-3 py-6 w-full translate-y-full"
+        className="bottom-0 z-10 fixed bg-white px-3 py-6 w-full max-w-xl translate-y-full"
       >
-        <ConfirmedRide setConfirmedRidePanel={setConfirmedRidePanel} />
+        <ConfirmedRide
+          setConfirmedRidePanel={setConfirmedRidePanel}
+          setVehicleFound={setVehicleFound}
+        />
+      </div>
+
+      <div
+        ref={vehicleFoundRef}
+        className="bottom-0 z-10 fixed bg-white px-3 py-6 w-full max-w-xl translate-y-full"
+      >
+        <LookingForDriver setVehicleFound={setVehicleFound} />
+      </div>
+
+      <div
+        ref={waitingForDriverRef}
+        className="bottom-0 z-10 fixed bg-white px-3 py-6 w-full max-w-xl"
+      >
+        <WaitingForDriver />
       </div>
     </div>
   );

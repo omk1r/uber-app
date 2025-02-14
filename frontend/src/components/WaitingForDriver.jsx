@@ -1,22 +1,31 @@
 import React from 'react';
 
-const ConfirmedRide = ({ setConfirmedRidePanel, setVehicleFound }) => {
+const WaitingForDriver = () => {
   return (
     <>
       <div className="flex justify-between">
-        <h3 className="mb-5 font-semibold text-2xl">Confirm your ride</h3>
+        <h3 className="mb-5 font-semibold text-2xl">
+          Meet at the pickup point
+        </h3>
 
-        <h5 onClick={() => setConfirmedRidePanel(false)} className="text-2xl">
+        <h5 className="text-2xl">
           <i className="ri-arrow-down-s-line"></i>
         </h5>
       </div>
-
-      <div className="flex flex-col justify-between items-center gap-2">
+      <div className="flex justify-evenly items-center">
         <img
           src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1712027307/assets/42/eb85c3-e2dc-4e95-a70d-22ee4f08015f/original/Screenshot-2024-04-01-at-9.08.07p.m..png"
           alt=""
-          className="h-20"
+          className="h-12"
         />
+        <div className="text-right">
+          <h2 className="font-medium text-lg">Sarthak</h2>
+          <h4 className="-mt-1 -mb-1 font-semibold text-xl">MH 20 EQ 2345</h4>
+          <p className="text-gray-600 text-sm">White Suzuki Espresso</p>
+        </div>
+      </div>
+
+      <div className="flex flex-col justify-between items-center gap-2">
         <div className="mt-5 w-full">
           <div className="flex items-center gap-5 p-3 border-gray-200 border-b-2">
             <i className="ri-map-pin-2-line"></i>
@@ -40,19 +49,9 @@ const ConfirmedRide = ({ setConfirmedRidePanel, setVehicleFound }) => {
             </div>
           </div>
         </div>
-
-        <button
-          onClick={() => {
-            setVehicleFound(true);
-            setConfirmedRidePanel(false);
-          }}
-          className="bg-green-600 mt-5 p-2 rounded-lg w-full font-semibold text-white"
-        >
-          Confirm
-        </button>
       </div>
     </>
   );
 };
 
-export default ConfirmedRide;
+export default WaitingForDriver;

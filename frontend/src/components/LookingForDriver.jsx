@@ -1,12 +1,12 @@
 import React from 'react';
 
-const ConfirmedRide = ({ setConfirmedRidePanel, setVehicleFound }) => {
+const LookingForDriver = ({ setVehicleFound }) => {
   return (
     <>
       <div className="flex justify-between">
-        <h3 className="mb-5 font-semibold text-2xl">Confirm your ride</h3>
+        <h3 className="mb-5 font-semibold text-2xl">Looking for a Driver</h3>
 
-        <h5 onClick={() => setConfirmedRidePanel(false)} className="text-2xl">
+        <h5 onClick={() => setVehicleFound(false)} className="text-2xl">
           <i className="ri-arrow-down-s-line"></i>
         </h5>
       </div>
@@ -40,19 +40,9 @@ const ConfirmedRide = ({ setConfirmedRidePanel, setVehicleFound }) => {
             </div>
           </div>
         </div>
-
-        <button
-          onClick={() => {
-            setVehicleFound(true);
-            setConfirmedRidePanel(false);
-          }}
-          className="bg-green-600 mt-5 p-2 rounded-lg w-full font-semibold text-white"
-        >
-          Confirm
-        </button>
       </div>
     </>
   );
 };
 
-export default ConfirmedRide;
+export default LookingForDriver;
