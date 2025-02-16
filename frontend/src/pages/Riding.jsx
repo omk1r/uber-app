@@ -32,7 +32,7 @@ const Riding = () => {
         <div className="flex flex-col justify-between items-center gap-2">
           <div className="mt-5 w-full">
             <div className="flex items-center gap-5 p-3 border-gray-200 border-b-2">
-              <i class="ri-map-pin-3-fill"></i>
+              <i className="ri-map-pin-3-fill"></i>
               <div>
                 <h3 className="font-medium text-lg">562/11-A</h3>
                 <p className="-mt-1 text-gray-500">Kankariya Talab, Bhopal</p>
