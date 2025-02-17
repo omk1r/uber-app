@@ -12,7 +12,7 @@ const FinishRide = ({ setFinishRidePanel }) => {
         </h5>
       </div>
 
-      <div className="flex justify-between items-center bg-yellow-300 mt-2 p-3 rounded-xl">
+      <div className="flex justify-between items-center mt-2 p-3 border-2 border-yellow-300 rounded-xl">
         <div className="flex items-center gap-3">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn9zilY2Yu2hc19pDZFxgWDTUDy5DId7ITqA&s"
@@ -51,11 +51,14 @@ const FinishRide = ({ setFinishRidePanel }) => {
 
         <div className="w-full">
           <Link
-            to={'/captain-riding'}
+            to={'/captain-home'}
             className="flex justify-center items-center bg-green-600 mt-2 p-3 rounded-lg w-full font-semibold text-white"
           >
-            Complete Ride
+            Finish Ride
           </Link>
+          <p className="mt-2 font-medium text-red-500 text-sm text-center">
+            Click on finish ride if you have completed the payment.
+          </p>
         </div>
       </div>
     </>
