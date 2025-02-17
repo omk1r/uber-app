@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const ConfirmRidePopup = ({ setConfirmRidePopupPanel, setRidePopupPanel }) => {
+  const [OTP, setOTP] = useState('');
+  const submitHandler = (e) => {
+    e.preventDefault();
+  };
   return (
-    <div>
+    <>
       <div className="flex justify-between mb-4">
         <h3 className="font-semibold text-2xl">Confirm this ride to start</h3>
 
@@ -60,6 +64,8 @@ const ConfirmRidePopup = ({ setConfirmRidePopupPanel, setRidePopupPanel }) => {
           >
             <input
               type="text"
+              value={OTP}
+              onChange={(e) => setOTP(e.target.value)}
               className="bg-[#eee] my-2 px-6 py-4 rounded-lg w-full font-mono text-lg"
               placeholder="Enter OTP"
             />
@@ -81,7 +87,7 @@ const ConfirmRidePopup = ({ setConfirmRidePopupPanel, setRidePopupPanel }) => {
           </form>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
