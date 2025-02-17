@@ -1,10 +1,16 @@
-const RidePopup = ({ setRidePopupPanel, setConfirmRidePopupPanel }) => {
-  return (
-    <>
-      <div className="flex justify-between mb-4">
-        <h3 className="font-semibold text-2xl">New Ride Available!</h3>
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-        <h5 onClick={() => setRidePopupPanel(false)} className="text-2xl">
+const ConfirmRidePopup = ({ setConfirmRidePopupPanel, setRidePopupPanel }) => {
+  return (
+    <div>
+      <div className="flex justify-between mb-4">
+        <h3 className="font-semibold text-2xl">Confirm this ride to start</h3>
+
+        <h5
+          onClick={() => setConfirmRidePopupPanel(false)}
+          className="text-2xl"
+        >
           <i className="ri-arrow-down-s-line"></i>
         </h5>
       </div>
@@ -46,25 +52,37 @@ const RidePopup = ({ setRidePopupPanel, setConfirmRidePopupPanel }) => {
           </div>
         </div>
 
-        <div className="flex justify-between items-center w-full">
-          <button
-            onClick={() => setRidePopupPanel(false)}
-            className="bg-gray-300 mt-1 p-2 px-8 rounded-lg font-semibold text-gray-700"
-          >
-            Ignore
-          </button>
-          <button
-            onClick={() => {
-              setConfirmRidePopupPanel(true);
+        <div className="w-full">
+          <form
+            onSubmit={(e) => {
+              submitHandler(e);
             }}
-            className="bg-green-600 mt-1 p-2 px-8 rounded-lg font-semibold text-white"
           >
-            Accept
-          </button>
+            <input
+              type="text"
+              className="bg-[#eee] my-2 px-6 py-4 rounded-lg w-full font-mono text-lg"
+              placeholder="Enter OTP"
+            />
+            <Link
+              to={'/captain-riding'}
+              className="flex justify-center items-center bg-green-600 mt-2 p-3 rounded-lg w-full font-semibold text-white"
+            >
+              Confirm
+            </Link>
+            <button
+              onClick={() => {
+                setConfirmRidePopupPanel(false);
+                setRidePopupPanel(false);
+              }}
+              className="bg-red-500 mt-1 p-3 rounded-lg w-full font-semibold text-white"
+            >
+              Cancel
+            </button>
+          </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default RidePopup;
+export default ConfirmRidePopup;
