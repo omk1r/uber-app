@@ -19,4 +19,6 @@ router.get(
   mapController.getDistanceTime
 );
 
+router.get('');
+
 module.exports = router;

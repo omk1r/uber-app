@@ -21,4 +21,14 @@ module.exports.getDistanceTime = async (req, res, next) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
+
+  const { origin, destination } = req.query;
+
+  try {
+    const distanceTime = await mapService.getDistanceTime(origin, destination);
+    res.status(200).json(distanceTime);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 };
