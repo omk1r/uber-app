@@ -39,7 +39,7 @@ const Riding = () => {
               </div>
             </div>
             <div className="flex items-center gap-5 p-3">
-              <i class="ri-currency-fill"></i>
+              <i className="ri-currency-fill"></i>
               <div>
                 <h3 className="font-medium text-lg">₹193.20</h3>
                 <p className="-mt-1 text-gray-500">Cash</p>

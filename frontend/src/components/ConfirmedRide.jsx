@@ -1,6 +1,14 @@
 import React from 'react';
 
-const ConfirmedRide = ({ setConfirmedRidePanel, setVehicleFound }) => {
+const ConfirmedRide = ({
+  setConfirmedRidePanel,
+  setVehicleFound,
+  createRide,
+  pickup,
+  destination,
+  fare,
+  vehicleType,
+}) => {
   return (
     <>
       <div className="flex justify-between">
@@ -22,20 +30,20 @@ const ConfirmedRide = ({ setConfirmedRidePanel, setVehicleFound }) => {
             <i className="ri-map-pin-2-line"></i>
             <div>
               <h3 className="font-medium text-lg">562/11-A</h3>
-              <p className="-mt-1 text-gray-500">Kankariya Talab, Bhopal</p>
+              <p className="-mt-1 text-gray-500">{pickup}</p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3 border-gray-200 border-b-2">
-            <i class="ri-map-pin-3-fill"></i>
+            <i className="ri-map-pin-3-fill"></i>
             <div>
               <h3 className="font-medium text-lg">562/11-A</h3>
-              <p className="-mt-1 text-gray-500">Kankariya Talab, Bhopal</p>
+              <p className="-mt-1 text-gray-500">{destination}</p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3">
-            <i class="ri-currency-fill"></i>
+            <i className="ri-currency-fill"></i>
             <div>
-              <h3 className="font-medium text-lg">₹193.20</h3>
+              <h3 className="font-medium text-lg">₹{fare[vehicleType]}</h3>
               <p className="-mt-1 text-gray-500">Cash</p>
             </div>
           </div>
@@ -45,6 +53,7 @@ const ConfirmedRide = ({ setConfirmedRidePanel, setVehicleFound }) => {
           onClick={() => {
             setVehicleFound(true);
             setConfirmedRidePanel(false);
+            createRide();
           }}
           className="bg-green-600 mt-5 p-2 rounded-lg w-full font-semibold text-white"
         >

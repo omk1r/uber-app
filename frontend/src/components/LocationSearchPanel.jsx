@@ -2,8 +2,6 @@ import React from 'react';
 
 const LocationSearchPanel = ({
   suggestions,
-  setVehiclePanel,
-  setPanelOpen,
   setPickup,
   setDestination,
   activeField,
@@ -14,8 +12,6 @@ const LocationSearchPanel = ({
     } else if (activeField === 'destination') {
       setDestination(suggestion);
     }
-    // setVehiclePanel(true)
-    // setPanelOpen(false)
   };
 
   return (

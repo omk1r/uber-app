@@ -1,6 +1,11 @@
 import React from 'react';
 
-const VehiclePanel = ({ setVehiclePanelOpen, setConfirmedRidePanel }) => {
+const VehiclePanel = ({
+  setVehiclePanelOpen,
+  setConfirmedRidePanel,
+  fare,
+  selectVehicle,
+}) => {
   return (
     <>
       {' '}
@@ -15,6 +20,7 @@ const VehiclePanel = ({ setVehiclePanelOpen, setConfirmedRidePanel }) => {
         onClick={() => {
           setConfirmedRidePanel(true);
           setVehiclePanelOpen(false);
+          selectVehicle('car');
         }}
         className="flex justify-between items-center mb-2 p-3 border-2 border-gray-200 active:border-black rounded-xl w-full"
       >
@@ -33,17 +39,18 @@ const VehiclePanel = ({ setVehiclePanelOpen, setConfirmedRidePanel }) => {
           <h5 className="font-medium text-sm">2 mins away</h5>
           <p className="text-gray-500 text-sm">Affordable, compact rides</p>
         </div>
-        <h2 className="font-semibold text-xl">₹193.20</h2>
+        <h2 className="font-semibold text-xl">₹{fare.car}</h2>
       </div>
       <div
         onClick={() => {
           setConfirmedRidePanel(true);
           setVehiclePanelOpen(false);
+          selectVehicle('auto');
         }}
         className="flex justify-between items-center mb-2 p-3 border-2 border-gray-200 active:border-black rounded-xl w-full"
       >
         <img
-          src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_470,w_835/v1657101905/assets/af/2c5369-2dec-4ea6-b67b-fba6e4a01f49/original/hcv_final.png"
+          src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1648431773/assets/1d/db8c56-0204-4ce4-81ce-56a11a07fe98/original/Uber_Auto_558x372_pixels_Desktop.png"
           alt=""
           className="h-12"
         />
@@ -57,12 +64,13 @@ const VehiclePanel = ({ setVehiclePanelOpen, setConfirmedRidePanel }) => {
           <h5 className="font-medium text-sm">2 mins away</h5>
           <p className="text-gray-500 text-sm">Affordable, compact rides</p>
         </div>
-        <h2 className="font-semibold text-xl">₹193.20</h2>
+        <h2 className="font-semibold text-xl">₹{fare.auto}</h2>
       </div>
       <div
         onClick={() => {
           setConfirmedRidePanel(true);
           setVehiclePanelOpen(false);
+          selectVehicle('moto');
         }}
         className="flex justify-between items-center mb-2 p-3 border-2 border-gray-200 active:border-black rounded-xl w-full"
       >
@@ -81,7 +89,7 @@ const VehiclePanel = ({ setVehiclePanelOpen, setConfirmedRidePanel }) => {
           <h5 className="font-medium text-sm">3 mins away</h5>
           <p className="text-gray-500 text-sm">Affordable, motorcycle ride</p>
         </div>
-        <h2 className="font-semibold text-xl">₹66.50</h2>
+        <h2 className="font-semibold text-xl">₹{fare.moto}</h2>
       </div>
     </>
   );

@@ -20,6 +20,8 @@ const Home = () => {
   const [pickupSuggestions, setPickupSuggestions] = useState([]);
   const [destinationSuggestions, setDestinationSuggestions] = useState([]);
   const [activeField, setActiveField] = useState(null);
+  const [fare, setFare] = useState({});
+  const [vehicleType, setVehicleType] = useState(null);
 
   const panelRef = useRef(null);
   const vehiclePanelRef = useRef(null);
@@ -29,37 +31,41 @@ const Home = () => {
 
   const handlePickupChange = async (e) => {
     setPickup(e.target.value);
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`,
-        {
-          params: { input: e.target.value },
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        }
-      );
-      setPickupSuggestions(response.data);
-    } catch {
-      // handle error
+    if (pickup.length >= 3) {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`,
+          {
+            params: { input: e.target.value },
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          }
+        );
+        setPickupSuggestions(response.data);
+      } catch {
+        // handle error
+      }
     }
   };
 
   const handleDestinationChange = async (e) => {
     setDestination(e.target.value);
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`,
-        {
-          params: { input: e.target.value },
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        }
-      );
-      setDestinationSuggestions(response.data);
-    } catch (err) {
-      console.log(err);
+    if (destination.length >= 3) {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`,
+          {
+            params: { input: e.target.value },
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          }
+        );
+        setDestinationSuggestions(response.data);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -142,6 +148,23 @@ const Home = () => {
       });
     }
   }, [waitingForDriver]);
+
+  async function createRide() {
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/rides/create`,
+      {
+        pickup,
+        destination,
+        vehicleType,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    );
+    console.log(response.data);
+  }
 
   async function findTrip() {
     setVehiclePanelOpen(true);
@@ -237,8 +260,6 @@ const Home = () => {
                 ? pickupSuggestions
                 : destinationSuggestions
             }
-            setPanelOpen={setPanelOpen}
-            setVehiclePanel={setVehiclePanelOpen}
             setPickup={setPickup}
             setDestination={setDestination}
             activeField={activeField}
@@ -252,6 +273,8 @@ const Home = () => {
         className="bottom-0 z-10 fixed bg-white px-3 py-8 w-full max-w-xl translate-y-full"
       >
         <VehiclePanel
+          selectVehicle={setVehicleType}
+          fare={fare}
           setVehiclePanelOpen={setVehiclePanelOpen}
           setConfirmedRidePanel={setConfirmedRidePanel}
         />
@@ -263,6 +286,11 @@ const Home = () => {
         className="bottom-0 z-10 fixed bg-white px-3 py-6 w-full max-w-xl translate-y-full"
       >
         <ConfirmedRide
+          pickup={pickup}
+          destination={destination}
+          fare={fare}
+          vehicleType={vehicleType}
+          createRide={createRide}
           setConfirmedRidePanel={setConfirmedRidePanel}
           setVehicleFound={setVehicleFound}
         />
@@ -272,7 +300,13 @@ const Home = () => {
         ref={vehicleFoundRef}
         className="bottom-0 z-10 fixed bg-white px-3 py-6 w-full max-w-xl translate-y-full"
       >
-        <LookingForDriver setVehicleFound={setVehicleFound} />
+        <LookingForDriver
+          pickup={pickup}
+          destination={destination}
+          fare={fare}
+          vehicleType={vehicleType}
+          setVehicleFound={setVehicleFound}
+        />
       </div>
 
       <div
