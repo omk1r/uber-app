@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CaptainDataContext } from '../context/CaptainContext';
 
 const CaptainDetails = () => {
+  const { captain } = useContext(CaptainDataContext);
   return (
     <div>
       {' '}
@@ -11,7 +13,9 @@ const CaptainDetails = () => {
             alt=""
             className="rounded-full w-10 h-10 object-cover"
           />
-          <h4 className="font-medium text-lg">Harsh Patel</h4>
+          <h4 className="font-medium text-lg capitalize">
+            {captain.fullname.firstname} {captain.fullname.lastname}
+          </h4>
         </div>
         <div>
           <h4 className="font-semibold text-xl">₹295.20</h4>

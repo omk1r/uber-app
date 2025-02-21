@@ -10,7 +10,7 @@ const ConfirmedRide = ({
   vehicleType,
 }) => {
   return (
-    <>
+    <div>
       <div className="flex justify-between">
         <h3 className="mb-5 font-semibold text-2xl">Confirm your ride</h3>
 
@@ -60,7 +60,7 @@ const ConfirmedRide = ({
           Confirm
         </button>
       </div>
-    </>
+    </div>
   );
 };
 

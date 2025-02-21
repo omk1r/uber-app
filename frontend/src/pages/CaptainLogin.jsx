@@ -23,6 +23,7 @@ const CaptainLogin = () => {
     );
     if (response.status === 200) {
       const data = response.data;
+      console.log(response.data);
       setCaptain(data.captain);
       localStorage.setItem('token', data.token);
       navigate('/captain-home');
@@ -45,7 +46,7 @@ const CaptainLogin = () => {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="bg-[#eeee] mb-7 px-4 py-2 rounded w-full text-lg placeholder:text-base"
+            className="bg-[#eeee] mb-7 px-4 py-2 rounded w-full placeholder:text-base text-lg"
             type="email"
             placeholder="email@example.com"
           />
@@ -58,10 +59,10 @@ const CaptainLogin = () => {
             name="password"
             id="password"
             placeholder="password"
-            className="bg-[#eeee] mb-7 px-4 py-2 rounded w-full text-lg placeholder:text-base"
+            className="bg-[#eeee] mb-7 px-4 py-2 rounded w-full placeholder:text-base text-lg"
           />
 
-          <button className="bg-[#111] mb-3 px-4 py-2 rounded w-full font-semibold text-lg text-white placeholder:text-base">
+          <button className="bg-[#111] mb-3 px-4 py-2 rounded w-full font-semibold text-white placeholder:text-base text-lg">
             Login
           </button>
         </form>
@@ -75,7 +76,7 @@ const CaptainLogin = () => {
       <div>
         <Link
           to="/login"
-          className="flex justify-center items-center bg-[#d5622d] mb-7 px-4 py-2 rounded w-full font-semibold text-lg text-white placeholder:text-base"
+          className="flex justify-center items-center bg-[#d5622d] mb-7 px-4 py-2 rounded w-full font-semibold text-white placeholder:text-base text-lg"
         >
           Sign in as User
         </Link>

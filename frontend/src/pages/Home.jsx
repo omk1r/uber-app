@@ -76,7 +76,7 @@ const Home = () => {
   useGSAP(() => {
     if (panelOpen) {
       gsap.to(panelRef.current, {
-        height: '65%',
+        height: '70%',
         padding: 24,
         opacity: 1,
         duration: 0.5,
@@ -200,7 +200,7 @@ const Home = () => {
       </div>
 
       {/* location search panel */}
-      <div className="top-0 absolute flex flex-col justify-end w-full h-screen">
+      <div className="top-0 absolute flex flex-col justify-end w-full h-full">
         <div className="relative flex flex-col justify-center bg-white p-6 h-[35%]">
           {panelOpen && (
             <h5 onClick={() => setPanelOpen(false)} className="text-2xl">
@@ -253,7 +253,7 @@ const Home = () => {
         </div>
 
         {/* location search history panel */}
-        <div ref={panelRef} className="bg-white h-0">
+        <div ref={panelRef} className="bg-white h-0 overflow-y-scroll">
           <LocationSearchPanel
             suggestions={
               activeField === 'pickup'
@@ -281,37 +281,41 @@ const Home = () => {
       </div>
 
       {/* confirmed vehicle panel */}
-      <div
-        ref={confirmedRidePanelRef}
-        className="bottom-0 z-10 fixed bg-white px-3 py-6 w-full max-w-xl translate-y-full"
-      >
-        <ConfirmedRide
-          pickup={pickup}
-          destination={destination}
-          fare={fare}
-          vehicleType={vehicleType}
-          createRide={createRide}
-          setConfirmedRidePanel={setConfirmedRidePanel}
-          setVehicleFound={setVehicleFound}
-        />
-      </div>
+      {confirmedRidePanel && (
+        <div
+          ref={confirmedRidePanelRef}
+          className="bottom-0 z-10 fixed bg-white px-3 py-8 w-full max-w-xl translate-y-full"
+        >
+          <ConfirmedRide
+            pickup={pickup}
+            destination={destination}
+            fare={fare}
+            vehicleType={vehicleType}
+            createRide={createRide}
+            setConfirmedRidePanel={setConfirmedRidePanel}
+            setVehicleFound={setVehicleFound}
+          />
+        </div>
+      )}
 
-      <div
-        ref={vehicleFoundRef}
-        className="bottom-0 z-10 fixed bg-white px-3 py-6 w-full max-w-xl translate-y-full"
-      >
-        <LookingForDriver
-          pickup={pickup}
-          destination={destination}
-          fare={fare}
-          vehicleType={vehicleType}
-          setVehicleFound={setVehicleFound}
-        />
-      </div>
+      {vehicleFound && (
+        <div
+          ref={vehicleFoundRef}
+          className="bottom-0 z-10 fixed bg-white px-3 py-8 w-full max-w-xl translate-y-full"
+        >
+          <LookingForDriver
+            pickup={pickup}
+            destination={destination}
+            fare={fare}
+            vehicleType={vehicleType}
+            setVehicleFound={setVehicleFound}
+          />
+        </div>
+      )}
 
       <div
         ref={waitingForDriverRef}
-        className="bottom-0 z-10 fixed bg-white px-3 py-6 w-full max-w-xl"
+        className="bottom-0 z-10 fixed bg-white px-3 py-8 w-full max-w-xl"
       >
         <WaitingForDriver waitingForDriver={waitingForDriver} />
       </div>

@@ -8,8 +8,10 @@ const ConfirmRidePopup = ({ setConfirmRidePopupPanel, setRidePopupPanel }) => {
   };
   return (
     <>
-      <div className="flex justify-between mb-4">
-        <h3 className="font-semibold text-2xl">Confirm this ride to start</h3>
+      <div className="flex justify-between">
+        <h3 className="mb-5 font-semibold text-2xl">
+          Confirm this ride to start
+        </h3>
 
         <h5
           onClick={() => setConfirmRidePopupPanel(false)}
