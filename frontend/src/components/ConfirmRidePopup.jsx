@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const ConfirmRidePopup = ({ setConfirmRidePopupPanel, setRidePopupPanel }) => {
+const ConfirmRidePopup = ({
+  setConfirmRidePopupPanel,
+  setRidePopupPanel,
+  ride,
+}) => {
   const [OTP, setOTP] = useState('');
   const submitHandler = (e) => {
     e.preventDefault();
@@ -28,7 +32,9 @@ const ConfirmRidePopup = ({ setConfirmRidePopupPanel, setRidePopupPanel }) => {
             alt=""
             className="rounded-full w-10 h-10 object-cover"
           />
-          <h2 className="font-medium text-xl">Urja saini</h2>
+          <h2 className="font-medium text-xl capitalize">
+            {ride?.user.fullname.firstname}
+          </h2>
         </div>
         <h5 className="font-semibold text-lg">2.2 KM</h5>
       </div>
@@ -39,20 +45,20 @@ const ConfirmRidePopup = ({ setConfirmRidePopupPanel, setRidePopupPanel }) => {
             <i className="ri-map-pin-2-line"></i>
             <div>
               <h3 className="font-medium text-lg">562/11-A</h3>
-              <p className="-mt-1 text-gray-500">Kankariya Talab, Bhopal</p>
+              <p className="-mt-1 text-gray-500">{ride?.pickup}</p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3 border-gray-200 border-b-2">
             <i className="ri-map-pin-3-fill"></i>
             <div>
               <h3 className="font-medium text-lg">562/11-A</h3>
-              <p className="-mt-1 text-gray-500">Kankariya Talab, Bhopal</p>
+              <p className="-mt-1 text-gray-500">{ride?.destination}</p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3">
             <i className="ri-currency-fill"></i>
             <div>
-              <h3 className="font-medium text-lg">₹193.20</h3>
+              <h3 className="font-medium text-lg">₹{ride?.fare}</h3>
               <p className="-mt-1 text-gray-500">Cash</p>
             </div>
           </div>
@@ -71,12 +77,9 @@ const ConfirmRidePopup = ({ setConfirmRidePopupPanel, setRidePopupPanel }) => {
               className="bg-[#eee] my-2 px-6 py-4 rounded-lg w-full font-mono text-lg"
               placeholder="Enter OTP"
             />
-            <Link
-              to={'/captain-riding'}
-              className="flex justify-center items-center bg-green-600 mt-2 p-3 rounded-lg w-full font-semibold text-white"
-            >
+            <button className="flex justify-center items-center bg-green-600 mt-2 p-3 rounded-lg w-full font-semibold text-white">
               Confirm
-            </Link>
+            </button>
             <button
               onClick={() => {
                 setConfirmRidePopupPanel(false);

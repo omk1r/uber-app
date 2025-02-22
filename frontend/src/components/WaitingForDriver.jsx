@@ -19,13 +19,14 @@ const WaitingForDriver = ({ ride }) => {
           className="h-12"
         />
         <div className="text-right">
-          <h2 className="font-medium text-lg">
+          <h2 className="font-medium text-lg capitalize">
             {ride?.captain.fullname.firstname}
           </h2>
-          <h4 className="-mt-1 -mb-1 font-semibold text-xl">
+          <h4 className="-mt-1 -mb-1 font-semibold text-xl uppercase">
             {ride?.captain.vehicle.plate}
           </h4>
           <p className="text-gray-600 text-sm">White Suzuki Espresso</p>
+          <p className="font-semibold">{ride?.otp}</p>
         </div>
       </div>
 
