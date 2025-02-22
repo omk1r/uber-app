@@ -11,20 +11,19 @@ function initializeSocket(server) {
       methods: ['GET', 'POST'],
     },
   });
+
   io.on('connection', (socket) => {
     console.log(`Client connected: ${socket.id}`);
 
     socket.on('join', async (data) => {
       const { userId, userType } = data;
 
+      console.log(`${userId} is joined as ${userType}`);
+
       if (userType === 'user') {
-        await userModel.findByIdAndUpdate(userId, {
-          socketId: socket.id,
-        });
+        await userModel.findByIdAndUpdate(userId, { socketId: socket.id });
       } else if (userType === 'captain') {
-        await captainModel.findByIdAndUpdate(userId, {
-          socketId: socket.id,
-        });
+        await captainModel.findByIdAndUpdate(userId, { socketId: socket.id });
       }
     });
 
@@ -49,12 +48,14 @@ function initializeSocket(server) {
   });
 }
 
-function sendMessageToSocketId(socketId, message) {
+const sendMessageToSocketId = (socketId, messageObject) => {
+  console.log(messageObject);
+
   if (io) {
-    io.to(socketId).emit('message', message);
+    io.to(socketId).emit(messageObject.event, messageObject.data);
   } else {
     console.log('Socket.io not initialized.');
   }
-}
+};
 
 module.exports = { initializeSocket, sendMessageToSocketId };

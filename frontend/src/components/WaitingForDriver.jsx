@@ -1,6 +1,6 @@
 import React from 'react';
 
-const WaitingForDriver = () => {
+const WaitingForDriver = ({ ride }) => {
   return (
     <>
       <div className="flex justify-between">
@@ -19,8 +19,12 @@ const WaitingForDriver = () => {
           className="h-12"
         />
         <div className="text-right">
-          <h2 className="font-medium text-lg">Sarthak</h2>
-          <h4 className="-mt-1 -mb-1 font-semibold text-xl">MH 20 EQ 2345</h4>
+          <h2 className="font-medium text-lg">
+            {ride?.captain.fullname.firstname}
+          </h2>
+          <h4 className="-mt-1 -mb-1 font-semibold text-xl">
+            {ride?.captain.vehicle.plate}
+          </h4>
           <p className="text-gray-600 text-sm">White Suzuki Espresso</p>
         </div>
       </div>
@@ -31,20 +35,20 @@ const WaitingForDriver = () => {
             <i className="ri-map-pin-2-line"></i>
             <div>
               <h3 className="font-medium text-lg">562/11-A</h3>
-              <p className="-mt-1 text-gray-500">Kankariya Talab, Bhopal</p>
+              <p className="-mt-1 text-gray-500">{ride?.pickup}</p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3 border-gray-200 border-b-2">
             <i className="ri-map-pin-3-fill"></i>
             <div>
               <h3 className="font-medium text-lg">562/11-A</h3>
-              <p className="-mt-1 text-gray-500">Kankariya Talab, Bhopal</p>
+              <p className="-mt-1 text-gray-500">{ride?.destination}</p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3">
             <i className="ri-currency-fill"></i>
             <div>
-              <h3 className="font-medium text-lg">₹193.20</h3>
+              <h3 className="font-medium text-lg">₹{ride?.fare}</h3>
               <p className="-mt-1 text-gray-500">Cash</p>
             </div>
           </div>

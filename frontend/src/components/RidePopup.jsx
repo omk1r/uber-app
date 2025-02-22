@@ -1,7 +1,12 @@
-const RidePopup = ({ setRidePopupPanel, setConfirmRidePopupPanel }) => {
+const RidePopup = ({
+  setRidePopupPanel,
+  setConfirmRidePopupPanel,
+  ride,
+  confirmRide,
+}) => {
   return (
     <>
-      <div className="flex justify-between mb-4">
+      <div className="flex justify-between mb-4 max-w-sm">
         <h3 className="font-semibold text-2xl">New Ride Available!</h3>
 
         <h5 onClick={() => setRidePopupPanel(false)} className="text-2xl">
@@ -16,7 +21,9 @@ const RidePopup = ({ setRidePopupPanel, setConfirmRidePopupPanel }) => {
             alt=""
             className="rounded-full w-10 h-10 object-cover"
           />
-          <h2 className="font-medium text-xl">Urja saini</h2>
+          <h2 className="font-medium text-xl">
+            {ride?.user.fullname.firstname + ' ' + ride?.user.fullname.lastname}
+          </h2>
         </div>
         <h5 className="font-semibold text-lg">2.2 KM</h5>
       </div>
@@ -27,20 +34,20 @@ const RidePopup = ({ setRidePopupPanel, setConfirmRidePopupPanel }) => {
             <i className="ri-map-pin-2-line"></i>
             <div>
               <h3 className="font-medium text-lg">562/11-A</h3>
-              <p className="-mt-1 text-gray-500">Kankariya Talab, Bhopal</p>
+              <p className="-mt-1 text-gray-500">{ride?.pickup}</p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3 border-gray-200 border-b-2">
             <i className="ri-map-pin-3-fill"></i>
             <div>
               <h3 className="font-medium text-lg">562/11-A</h3>
-              <p className="-mt-1 text-gray-500">Kankariya Talab, Bhopal</p>
+              <p className="-mt-1 text-gray-500">{ride?.destination}</p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3">
             <i className="ri-currency-fill"></i>
             <div>
-              <h3 className="font-medium text-lg">₹193.20</h3>
+              <h3 className="font-medium text-lg">{ride?.fare}</h3>
               <p className="-mt-1 text-gray-500">Cash</p>
             </div>
           </div>
@@ -56,6 +63,7 @@ const RidePopup = ({ setRidePopupPanel, setConfirmRidePopupPanel }) => {
           <button
             onClick={() => {
               setConfirmRidePopupPanel(true);
+              confirmRide();
             }}
             className="bg-green-600 mt-1 p-2 px-8 rounded-lg font-semibold text-white"
           >
