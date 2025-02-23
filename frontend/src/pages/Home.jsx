@@ -11,7 +11,6 @@ import axios from 'axios';
 import { SocketContext } from '../context/SocketContext';
 import { UserDataContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
-import LiveTracking from '../components/LiveTracking';
 
 const Home = () => {
   const [pickup, setPickup] = useState('');
@@ -217,7 +216,11 @@ const Home = () => {
       />
 
       <div className="w-full">
-        <LiveTracking />
+        <img
+          src="https://cdn.dribbble.com/users/914217/screenshots/4506553/media/7be2be6f43f64c27946d1068a602ece1.gif"
+          alt=""
+          className="w-full h-screen object-cover"
+        />
       </div>
 
       {/* location search panel */}
