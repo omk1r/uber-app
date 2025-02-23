@@ -1,48 +1,63 @@
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom'; // Added useLocation
+import { useEffect, useContext } from 'react';
+import { SocketContext } from '../context/SocketContext';
+import { useNavigate } from 'react-router-dom';
+// import LiveTracking from '../components/LiveTracking';
 
 const Riding = () => {
+  const location = useLocation();
+  const { ride } = location.state || {}; // Retrieve ride data
+  const { socket } = useContext(SocketContext);
+  const navigate = useNavigate();
+
+  socket.on('ride-ended', () => {
+    navigate('/home');
+  });
+
   return (
     <div className="h-screen">
       <Link
-        to={'/home'}
+        to="/home"
         className="top-2 right-2 fixed flex justify-center items-center bg-white rounded-full w-10 h-10"
       >
-        <i className="ri-home-line font-medium text-lg"></i>
+        <i className="ri-home-5-line font-medium text-lg"></i>
       </Link>
-      <div className="h-1/2">
-        <img
-          src="https://cdn.dribbble.com/users/914217/screenshots/4506553/media/7be2be6f43f64c27946d1068a602ece1.gif"
-          alt=""
-        />
-      </div>
-
+      <div className="h-1/2">{/* <LiveTracking /> */}</div>
       <div className="p-4 h-1/2">
-        <div className="flex justify-evenly items-center">
+        <div className="flex justify-between items-center">
           <img
-            src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_368,w_552/v1712027307/assets/42/eb85c3-e2dc-4e95-a70d-22ee4f08015f/original/Screenshot-2024-04-01-at-9.08.07p.m..png"
-            alt=""
             className="h-12"
+            src="https://swyft.pl/wp-content/uploads/2023/05/how-many-people-can-a-uberx-take.jpg"
+            alt=""
           />
           <div className="text-right">
-            <h2 className="font-medium text-lg">Sarthak</h2>
-            <h4 className="-mt-1 -mb-1 font-semibold text-xl">MH 20 EQ 2345</h4>
-            <p className="text-gray-600 text-sm">White Suzuki Espresso</p>
+            <h2 className="font-medium text-lg capitalize">
+              {ride?.captain.fullname.firstname}
+            </h2>
+            <h4 className="-mt-1 -mb-1 font-semibold text-xl uppercase">
+              {ride?.captain.vehicle.plate}
+            </h4>
+            <p className="text-gray-600 text-sm">Maruti Suzuki Alto</p>
           </div>
         </div>
+
         <div className="flex flex-col justify-between items-center gap-2">
           <div className="mt-5 w-full">
-            <div className="flex items-center gap-5 p-3 border-gray-200 border-b-2">
-              <i className="ri-map-pin-3-fill"></i>
+            <div className="flex items-center gap-5 p-3 border-b-2">
+              <i className="ri-map-pin-2-fill text-lg"></i>
               <div>
                 <h3 className="font-medium text-lg">562/11-A</h3>
-                <p className="-mt-1 text-gray-500">Kankariya Talab, Bhopal</p>
+                <p className="-mt-1 text-gray-600 text-sm">
+                  {ride?.destination}
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-5 p-3">
-              <i className="ri-currency-fill"></i>
+              <i className="ri-currency-line"></i>
               <div>
-                <h3 className="font-medium text-lg">₹193.20</h3>
-                <p className="-mt-1 text-gray-500">Cash</p>
+                <h3 className="font-medium text-lg">₹{ride?.fare} </h3>
+                <p className="-mt-1 text-gray-600 text-sm">Cash Cash</p>
               </div>
             </div>
           </div>

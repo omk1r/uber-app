@@ -10,6 +10,8 @@ import WaitingForDriver from '../components/WaitingForDriver';
 import axios from 'axios';
 import { SocketContext } from '../context/SocketContext';
 import { UserDataContext } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
+import LiveTracking from '../components/LiveTracking';
 
 const Home = () => {
   const [pickup, setPickup] = useState('');
@@ -31,6 +33,7 @@ const Home = () => {
   const confirmedRidePanelRef = useRef(null);
   const vehicleFoundRef = useRef(null);
   const waitingForDriverRef = useRef(null);
+  const navigate = useNavigate();
 
   const { socket } = useContext(SocketContext);
   const { user } = useContext(UserDataContext);
@@ -40,9 +43,15 @@ const Home = () => {
   }, [user]);
 
   socket.on('ride-confirmed', (ride) => {
-    setRide(ride);
     console.log(ride);
+    setVehicleFound(false);
+    setRide(ride);
     setWaitingForDriver(true);
+  });
+
+  socket.on('ride-started', (ride) => {
+    setWaitingForDriver(false);
+    navigate('/riding', { state: { ride } });
   });
 
   const handlePickupChange = async (e) => {
@@ -208,11 +217,7 @@ const Home = () => {
       />
 
       <div className="w-full">
-        <img
-          src="https://cdn.dribbble.com/users/914217/screenshots/4506553/media/7be2be6f43f64c27946d1068a602ece1.gif"
-          alt=""
-          className="w-full h-screen object-cover"
-        />
+        <LiveTracking />
       </div>
 
       {/* location search panel */}
